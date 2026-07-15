@@ -1,0 +1,1 @@
+Frontier Strike: Low Poly Shooter is a fast-paced 3D action game built in Unity using the Low Poly Shooter Pack Free Sample. Designed for both WebGL and Windows, it delivers a streamlined FPS experience that blends arcade-style shooting with tactical survival elements.
