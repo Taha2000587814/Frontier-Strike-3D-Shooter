@@ -33,6 +33,10 @@ namespace InfimaGames.LowPolyShooterPack
         [SerializeField]
         private float maximumDistance = 500.0f;
 
+        [Tooltip("Damage dealt by each projectile. Negative = default for the fire mode (20 automatic, 34 semi-auto).")]
+        [SerializeField]
+        private float damage = -1.0f;
+
         [Header("Animation")]
 
         [Tooltip("Transform that represents the weapon's ejection port, meaning the part of the weapon that casings shoot from.")]
@@ -233,9 +237,18 @@ namespace InfimaGames.LowPolyShooterPack
                 
             //Spawn projectile from the projectile spawn point.
             GameObject projectile = Instantiate(prefabProjectile, muzzleSocket.position, rotation);
+            //Frontier Strike: pass this weapon's damage on to the projectile.
+            if (projectile.TryGetComponent(out Projectile projectileComponent))
+                projectileComponent.damage = GetDamage();
             //Add velocity to the projectile.
             projectile.GetComponent<Rigidbody>().linearVelocity = projectile.transform.forward * projectileImpulse;   
         }
+
+        /// <summary>
+        /// Damage per projectile. A negative value picks a default based on the fire mode
+        /// (automatic weapons hit softer than semi-automatic ones).
+        /// </summary>
+        public float GetDamage() => damage >= 0.0f ? damage : (automatic ? 20.0f : 34.0f);
 
         public override void FillAmmunition(int amount)
         {

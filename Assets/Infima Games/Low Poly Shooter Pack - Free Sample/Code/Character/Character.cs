@@ -251,6 +251,19 @@ namespace InfimaGames.LowPolyShooterPack
 		
 		public override bool IsAiming() => aiming;
 		public override bool IsCursorLocked() => cursorLocked;
+
+		public override void SetCursorLocked(bool locked)
+		{
+			cursorLocked = locked;
+			UpdateCursorState();
+
+			//Clear held input so nothing keeps firing/moving while the cursor is free.
+			if (!locked)
+			{
+				holdingButtonFire = holdingButtonAim = holdingButtonRun = false;
+				axisMovement = axisLook = default;
+			}
+		}
 		
 		public override bool IsTutorialTextVisible() => tutorialTextVisible;
 		

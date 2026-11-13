@@ -62,6 +62,10 @@ namespace InfimaGames.LowPolyShooterPack
         /// Returns true if the game cursor is locked.
         /// </summary>
         public abstract bool IsCursorLocked();
+        /// <summary>
+        /// Locks or unlocks the cursor. While unlocked, all gameplay input is ignored.
+        /// </summary>
+        public abstract void SetCursorLocked(bool locked);
 
         /// <summary>
         /// Returns true if the tutorial text should be visible on the screen.
